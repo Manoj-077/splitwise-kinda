@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <div>
+      <p class="muted">Expenses</p>
+      <h3>All shared expenses</h3>
+    </div>
+  </div>
+
+  <div class="list" *ngIf="expenses.length; else empty">
+    <div class="expense-row" *ngFor="let expense of expenses">
+      <div>
+        <div class="title">{{ expense.description }}</div>
+        <div class="muted">
+          {{ expense.category }} · {{ groupName(expense.groupId) }} · Paid by {{ userName(expense.paidBy) }}
+        </div>
+        <div class="muted small">{{ expense.date | date }}</div>
+      </div>
+      <div class="amount">{{ expense.amount | currency }}</div>
+      <button class="ghost" (click)="deleteExpense(expense)">Delete</button>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <div class="muted">No expenses recorded yet.</div>
+  </ng-template>
+</div>

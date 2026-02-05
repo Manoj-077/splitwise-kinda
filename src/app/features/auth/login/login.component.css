@@ -1,0 +1,17 @@
+.auth-wrapper {
+  max-width: 460px;
+  margin: 2rem auto;
+}
+
+.auth-card h1 {
+  margin: 0 0 0.35rem;
+}
+
+.auth-card .muted a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.error {
+  color: #dc2626;
+}

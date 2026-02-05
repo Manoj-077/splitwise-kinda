@@ -1,0 +1,31 @@
+.stat-card {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+}
+
+.stat-card .label {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.stat-card .value {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.stat-card .hint {
+  color: var(--muted);
+}
+
+.primary {
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+}
+
+.success {
+  background: linear-gradient(135deg, #ecfdf3, #f0fdf4);
+}
+
+.muted {
+  background: #f8fafc;
+}

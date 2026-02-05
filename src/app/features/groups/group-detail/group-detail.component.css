@@ -1,0 +1,78 @@
+.group-hero h2 {
+  margin: 0 0 0.5rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1rem;
+}
+
+.balance,
+.transfer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.35rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.balance:last-child,
+.transfer:last-child {
+  border-bottom: none;
+}
+
+.positive {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.negative {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.expense-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.75rem 0.35rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.expense-row:last-child {
+  border-bottom: none;
+}
+
+.amount {
+  font-weight: 800;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid #e5e7eb;
+  padding: 0.45rem 0.7rem;
+}
+
+.small-btn {
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-row {
+    grid-template-columns: 1fr;
+  }
+}

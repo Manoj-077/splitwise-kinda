@@ -1,0 +1,83 @@
+<div *ngIf="group" class="stack">
+  <div class="card group-hero">
+    <div>
+      <p class="muted">Group</p>
+      <h2>{{ group.name }}</h2>
+      <div class="chips">
+        <span class="chip" *ngFor="let member of members">{{ member.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-two">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <p class="muted">Expense</p>
+          <h3>Add a new expense</h3>
+        </div>
+      </div>
+      <div class="muted" *ngIf="editingExpense">
+        Editing: <strong>{{ editingExpense.description }}</strong>
+        <button class="ghost small-btn" type="button" (click)="editingExpense = undefined">Cancel</button>
+      </div>
+      <app-expense-form
+        [groupId]="group.id"
+        [participants]="members"
+        [expense]="editingExpense"
+        (saved)="addExpense($event)"
+      ></app-expense-form>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <p class="muted">Balance</p>
+          <h3>Who owes whom</h3>
+        </div>
+      </div>
+
+      <div class="list">
+        <div class="balance" *ngFor="let balance of balances">
+          <div>{{ memberName(balance.userId) }}</div>
+          <div [ngClass]="{ positive: balance.amount > 0, negative: balance.amount < 0 }">
+            {{ balance.amount | currency }}
+          </div>
+        </div>
+      </div>
+
+      <p class="muted">Suggested settlements</p>
+      <div class="list">
+        <div class="transfer" *ngFor="let t of transfers">
+          <span>{{ memberName(t.from) }} → {{ memberName(t.to) }}</span>
+          <strong>{{ t.amount | currency }}</strong>
+        </div>
+        <div class="muted" *ngIf="!transfers.length">Everything is settled 🎉</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <p class="muted">Expenses</p>
+        <h3>Activity in this group</h3>
+      </div>
+    </div>
+    <div class="list" *ngIf="expenses.length; else noExpenses">
+      <div class="expense-row" *ngFor="let expense of expenses">
+        <div>
+          <div class="title">{{ expense.description }}</div>
+          <div class="muted">{{ expense.category }} · Paid by {{ memberName(expense.paidBy) }}</div>
+          <div class="muted small">{{ expense.date | date }}</div>
+        </div>
+        <div class="amount">{{ expense.amount | currency }}</div>
+        <button class="ghost" (click)="startEdit(expense)">Edit</button>
+        <button class="ghost" (click)="removeExpense(expense)">Delete</button>
+      </div>
+    </div>
+    <ng-template #noExpenses>
+      <div class="muted">No expenses yet.</div>
+    </ng-template>
+  </div>
+</div>

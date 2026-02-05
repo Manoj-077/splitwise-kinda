@@ -1,0 +1,24 @@
+<div class="grid-two">
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <p class="muted">You</p>
+        <h3>Your spend by category</h3>
+      </div>
+    </div>
+    <canvas baseChart [data]="userChartData" [type]="'doughnut'"></canvas>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <p class="muted">Groups</p>
+        <h3>Category spend</h3>
+      </div>
+      <select [value]="selectedGroupId" (change)="onGroupChange($event.target.value)">
+        <option *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
+      </select>
+    </div>
+    <canvas baseChart [data]="groupChartData" [type]="'bar'" [options]="barOptions"></canvas>
+  </div>
+</div>

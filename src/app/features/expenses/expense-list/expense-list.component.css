@@ -1,0 +1,38 @@
+.expense-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.expense-row:last-child {
+  border-bottom: none;
+}
+
+.amount {
+  font-weight: 800;
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid #e5e7eb;
+  padding: 0.45rem 0.7rem;
+}
+
+@media (max-width: 800px) {
+  .expense-row {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+  }
+
+  .ghost {
+    width: fit-content;
+  }
+}

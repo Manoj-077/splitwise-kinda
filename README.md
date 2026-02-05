@@ -1,57 +1,41 @@
 # splitwise-kinda
 
-Splitwise-like expense sharing web app built with Angular v15, JSON Server, ng2-charts/Chart.js.
+Splitwise-like expense sharing web app built with **Angular v15**, JSON Server, and ng2-charts/Chart.js.
 
 ## Prerequisites
 - Node.js 18+ and npm
-- Angular CLI ^15 (install globally: `npm i -g @angular/cli@15`)
+- Angular CLI ^15 (`npm i -g @angular/cli@15`)
 
-## Install
+## Install & Run
 ```bash
 npm install
+npm run json-server   # starts mock API at http://localhost:3000
+npm start             # serves Angular app at http://localhost:4200 (proxied to /api)
 ```
 
-## Local API (JSON Server)
-Start the mock backend on port 3000 (uses `db.json`):
-```bash
-npm run json-server
-```
+### Sample credentials
+- alice@example.com / password
+- bob@example.com / password
+- carol@example.com / password
 
-## Run the app (dev)
-In another terminal:
-```bash
-npm start
-```
-App runs at http://localhost:4200 and will proxy API calls to http://localhost:3000 (configure `environment.ts` if needed).
+## Scripts
+- `npm start` – `ng serve` with proxy to JSON Server
+- `npm run json-server` – start mock backend (`db.json`)
+- `npm run build` – production build to `dist/`
+- `npm test` – unit tests
 
-## Build (prod)
-```bash
-npm run build
-```
-Output is in `dist/`.
-
-## Lint & Tests
-```bash
-npm run lint
-npm test
-```
-(Configure tests as needed.)
+## Features
+- Mock authentication with route guards
+- Groups, expenses, settlements (JSON Server backed)
+- Add/Edit/Delete expenses with equal split
+- Balance calculation & suggested settlements
+- User and group analytics via Chart.js / ng2-charts
+- Responsive layout with top/bottom navigation
 
 ## Project structure (key folders)
 - `src/app/core` – guards, interceptors
-- `src/app/shared` – reusable components/pipes
-- `src/app/features` – auth, dashboard, groups, expenses, analytics (lazy-loaded modules)
-- `src/app/services` – API/data services
+- `src/app/shared` – reusable UI components
+- `src/app/features` – auth, dashboard, groups, expenses, analytics (lazy-loaded)
+- `src/app/services` – API/data/analytics services
 - `src/app/models` – TypeScript interfaces
 - `db.json` – JSON Server data
-
-## Notes
-- Uses Angular v15 features (no v16+ signals/control flow).
-- Charts via ng2-charts/Chart.js.
-- Auth is mock; adapt JSON Server middleware for real tokens if needed.
-
-## Common scripts
-- `npm start` – serve Angular app (port 4200)
-- `npm run json-server` – start mock API (port 3000)
-- `npm run build` – production build
-- `npm run lint` – lint

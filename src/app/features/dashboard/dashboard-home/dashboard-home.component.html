@@ -1,0 +1,56 @@
+<div class="stack">
+  <div class="welcome card" *ngIf="user">
+    <div>
+      <p class="muted">Hi {{ user.name }} 👋</p>
+      <h2>Here's a quick snapshot of your balances</h2>
+    </div>
+    <a routerLink="/groups" class="cta-link">View your groups →</a>
+  </div>
+
+  <div class="stats-grid">
+    <app-stat-card label="You've paid" [value]="totalPaid | currency" tone="primary"></app-stat-card>
+    <app-stat-card label="You owe" [value]="totalOwes | currency" tone="muted"></app-stat-card>
+    <app-stat-card
+      label="Net balance"
+      [value]="netBalance | currency"
+      [hint]="netBalance >= 0 ? 'You are owed overall' : 'You owe your friends'"
+      tone="success"
+    ></app-stat-card>
+  </div>
+
+  <div class="columns">
+    <div class="card chart-card">
+      <div class="card-header">
+        <div>
+          <p class="muted">Spending analytics</p>
+          <h3>Your spend by category</h3>
+        </div>
+      </div>
+      <canvas baseChart [data]="donutData" [options]="donutOptions" [type]="'doughnut'"></canvas>
+    </div>
+
+    <div class="card groups-card">
+      <div class="card-header">
+        <div>
+          <p class="muted">Groups</p>
+          <h3>Where you're splitting</h3>
+        </div>
+        <a routerLink="/groups" class="cta-link">Manage</a>
+      </div>
+      <div class="list" *ngIf="groups.length; else noGroups">
+        <div class="group-row" *ngFor="let group of groups" [routerLink]="['/groups', group.id]">
+          <div>
+            <div class="group-name">{{ group.name }}</div>
+            <div class="muted">{{ group.members.length }} members</div>
+          </div>
+          <div class="chip">
+            {{ groupTotal(group.id) | currency }}
+          </div>
+        </div>
+      </div>
+      <ng-template #noGroups>
+        <div class="muted">No groups yet. Create one to start sharing expenses.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>
