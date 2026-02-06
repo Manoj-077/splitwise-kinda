@@ -1,0 +1,17 @@
+.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.card-header select {
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 900px) {
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+}

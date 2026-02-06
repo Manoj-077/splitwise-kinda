@@ -1,0 +1,53 @@
+<div class="grid-layout">
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <p class="muted">Create group</p>
+        <h3>Split expenses with friends</h3>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="create()" class="stack">
+      <div>
+        <label>Group name</label>
+        <input formControlName="name" placeholder="Roommates, Trip, Rent..." />
+        <small class="error" *ngIf="form.controls.name.invalid && form.controls.name.touched">Name is required</small>
+      </div>
+
+      <div>
+        <label>Members</label>
+        <div class="members">
+          <label class="member" *ngFor="let user of users">
+            <input type="checkbox" [checked]="isMemberChecked(user.id)" (change)="toggleMember(user.id)" />
+            <span>{{ user.name }}</span>
+          </label>
+        </div>
+        <small class="error" *ngIf="!(form.value.members?.length)">Select at least one member</small>
+      </div>
+
+      <button type="submit" [disabled]="loading">{{ loading ? 'Creating...' : 'Create group' }}</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <p class="muted">Your groups</p>
+        <h3>Manage balances</h3>
+      </div>
+    </div>
+
+    <div class="list" *ngIf="groups.length; else empty">
+      <div class="group-row" *ngFor="let group of groups" (click)="goTo(group)">
+        <div>
+          <div class="group-name">{{ group.name }}</div>
+          <div class="muted">{{ group.members.length }} members</div>
+        </div>
+        <span class="cta-link">Open →</span>
+      </div>
+    </div>
+    <ng-template #empty>
+      <div class="muted">No groups yet.</div>
+    </ng-template>
+  </div>
+</div>
